@@ -128,10 +128,13 @@ router.post("/", csrfProtection, (req, res, next) => {
 
   // Here is also the place to add data to the ID or access token. For example,
   // if the scope 'profile' is added, add the family and given name to the ID Token claims:
-  // if (grantScope.indexOf('profile')) {
-  //   session.id_token.family_name = 'Doe'
-  //   session.id_token.given_name = 'John'
-  // }
+  if (grantScope.indexOf('profile')) {
+    session.id_token.family_name = 'Doe'
+    session.id_token.given_name = 'John'
+  }
+  if (grantScope.indexOf('email')) {
+    session.id_token.email = 'foo@bar.com'
+  }
 
   // Let's fetch the consent request again to be able to set `grantAccessTokenAudience` properly.
   hydraAdmin
